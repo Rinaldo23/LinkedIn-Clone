@@ -1,7 +1,10 @@
 .header {
     display: flex;
+    width: 80vw;
     justify-content: space-evenly;
     border-bottom: 0.1px solid lightgray;
+    background-color: white;
+    width: 100vw;
 }
 
 .linkedin-logo {

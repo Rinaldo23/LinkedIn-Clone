@@ -7,6 +7,8 @@
     text-align: center;
     height: fit-content;
     /* padding: 1rem; */
+    margin-top: 20px;
+    margin-right: 10px;
 }
 
 .sidebar__avatar {
@@ -92,6 +94,7 @@ h4 {
     font-weight: 600;
     margin-bottom: 10px;
     margin-top: 0;
+    margin-left: 5px;
 }
 
 .sidebar__recentItem{
@@ -100,6 +103,8 @@ h4 {
     color: gray;
     font-weight: bolder;
     cursor: pointer;
+    padding-left: 5px;
+    padding-right: 10px;
 }
 
 .sidebar__hash {
