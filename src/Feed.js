@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Feed.css'
 import EditIcon from '@mui/icons-material/Edit';
-import SendIcon from '@mui/icons-material/Send';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -9,8 +8,42 @@ import ArticleIcon from '@mui/icons-material/Article';
 import { Avatar } from '@mui/material';
 import InputOptions from './InputOptions';
 import Post from './Post';
+import { db } from './firebase'
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore';
 
 function Feed() {
+
+    const [posts, setPosts] = useState([]);
+    const [input, setInput] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        let obj = {
+            name: "Rinaldo Badigar",
+            description: "I am a Web Developer",
+            message: input,
+            timestamp: serverTimestamp(),
+        }
+
+        // await setDoc(doc(db, "Users", "Some-id"), obj); // agar unique userID na ho toh niche wala line use kr
+        const docRef = await addDoc(collection(db, "Users"), obj)
+        // console.log("Document written with ID: ", docRef.id);
+        setInput('')
+    }
+
+    useEffect(() => {
+        const q = query(collection(db, "Users"), orderBy("timestamp","desc"));  //query word important hai
+        const unsubscribe = onSnapshot(q, (Snapshot) => {
+            setPosts(
+                Snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    data: doc.data()
+                }))
+            )
+        })
+    }, [posts])
+
     return (
         <div className='feed'>
             <div className="feed__inputContainer">
@@ -19,9 +52,9 @@ function Feed() {
                     <div className="feed__input">
                         <EditIcon className='feed__editIcon' />
                         <form>
-                            <input type="text" placeholder='Start a Post' />
+                            <input value={input} onChange={(e) => setInput(e.target.value)} type="text" placeholder='Start a Post' />
                             {/* <SendIcon type="submit" /> */}
-                            <button type="submit" hidden />
+                            <button onClick={handleSubmit} type="submit" hidden />
                         </form>
                     </div>
                 </div>
@@ -34,7 +67,17 @@ function Feed() {
                 </div>
             </div>
 
-            <Post name="Rinaldo" description="I am a web Developer" message="This is my first clone" />
+            {
+                posts.map(({ id, data: { name, description, message } }) => (
+                    <Post
+                        key={id}
+                        name={name}
+                        description={description}
+                        message={message}
+                    />
+                ))
+            }
+
         </div>
     )
 }

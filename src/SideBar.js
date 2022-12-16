@@ -14,8 +14,8 @@ function SideBar() {
     return (
         <div className='sidebar'>
             <div className="sidebar__top">
-                <img src="https://media-exp1.licdn.com/dms/image/C4D12AQHMPBvE3avWzg/article-inline_image-shrink_1000_1488/0/1616872522462?e=1676505600&v=beta&t=fnEPHR2L_xz8z6BImN0bWxvJ9F2kQqIM-U0Yf59kQ7g" />
-                <Avatar className='sidebar__avatar' src={"https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg"} />
+                <img alt="profile-background" src="https://media-exp1.licdn.com/dms/image/C4D12AQHMPBvE3avWzg/article-inline_image-shrink_1000_1488/0/1616872522462?e=1676505600&v=beta&t=fnEPHR2L_xz8z6BImN0bWxvJ9F2kQqIM-U0Yf59kQ7g" />
+                <Avatar className='sidebar-avatar' src={"https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg"} />
                 <h2>Welcome, Rinaldo!</h2>
                 <h4>rinaldobadigar98@gmail.com</h4>
             </div>
