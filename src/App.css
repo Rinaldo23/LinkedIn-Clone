@@ -3,11 +3,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* border: 2px solid rgb(223, 12, 12); */
+    height:auto;
 }
 
 .app__body {
     display: flex;
-    /* width: 80vw;
-    justify-content: center; */
+    width: 63vw;
+    justify-content: center;
     /* border: 2px solid black; */
 }
