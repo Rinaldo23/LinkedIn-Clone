@@ -1,5 +1,5 @@
 import React from 'react'
-import './RightSide.css'
+import '../Style/RightSide.css'
 
 function Widget() {
     return (

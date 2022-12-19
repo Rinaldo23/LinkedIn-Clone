@@ -1,6 +1,6 @@
 import { Avatar } from '@mui/material'
 import React from 'react'
-import './SideBar.css'
+import '../Style/SideBar.css'
 
 function SideBar() {
 

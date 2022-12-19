@@ -1,7 +1,7 @@
 import { Avatar } from '@mui/material'
 import React from 'react'
 import InputOptions from './InputOptions'
-import './Post.css'
+import '../Style/Post.css'
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import CommentIcon from '@mui/icons-material/Comment';
 import LoopIcon from '@mui/icons-material/Loop';

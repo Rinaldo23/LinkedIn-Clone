@@ -6,7 +6,7 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import './Header.css'
+import '../Style/Header.css'
 import HeaderOption from './HeaderOption';
 
 function Header() {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './Feed.css'
+import '../Style/Feed.css'
 import EditIcon from '@mui/icons-material/Edit';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import YouTubeIcon from '@mui/icons-material/YouTube';
@@ -8,7 +8,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import { Avatar } from '@mui/material';
 import InputOptions from './InputOptions';
 import Post from './Post';
-import { db } from './firebase'
+import { db } from '../firebase'
 import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore';
 
 function Feed() {
