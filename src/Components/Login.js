@@ -1,6 +1,6 @@
 import { Button, TextField } from '@mui/material'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import { doc, setDoc } from 'firebase/firestore'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -19,20 +19,35 @@ function Login() {
 
     const dispatch = useDispatch();
 
-    const loginToApp = async () => {
-        await signInWithEmailAndPassword(auth, email, password)
+    const loginToApp = async (e) => {
+        e.preventDefault();
+        try {
+            setLoading(true)
+            setError('')
+            await signInWithEmailAndPassword(auth, email, password)
+            console.log("Logged In")
+        } catch (error) {
+            console.log(error)
+            setError(error.message)
+            setTimeout(() => {
+                setError('')
+            }, 2000);
+        }
+        setLoading(false)
+
+
     }
 
     let registerUser = async () => {
-        if(!name){
+        if (!name) {
             return alert("Please enter a Name")
         }
 
-        if(!email){
+        if (!email) {
             return alert("Please enter a email")
         }
 
-        if(!password){
+        if (!password) {
             return alert("Please enter a password")
         }
 
@@ -43,7 +58,9 @@ function Login() {
             console.log("Signed Up")
 
             const storageRef = ref(storage, `Profile-pics/${user.user.uid}`);
+
             const uploadTask = uploadBytesResumable(storageRef, file);
+
             uploadTask.on('state_changed',
                 (snapshot) => {
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -57,7 +74,7 @@ function Login() {
                         console.log('File available at', downloadURL);
 
                         let userObj = {
-                            name: name,
+                            displayName: name,
                             email: email,
                             uid: user.user.uid,
                             photoURL: downloadURL,
@@ -66,6 +83,13 @@ function Login() {
                     });
                 }
             );
+
+            dispatch(login({
+                email: user.user.email,
+                // name: user.user.displayName, // Dikha he nhi raha
+                // photoURL: user.user.downloadURL, //Null
+                uid: user.user.uid
+            }))
         }
         catch (error) {
             console.log(error)
@@ -74,7 +98,11 @@ function Login() {
                 setError('')
             }, 2000);
         }
+
         setLoading(false)
+        setName('')
+        setEmail('')
+        setPassword('')
     }
 
     return (
